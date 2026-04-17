@@ -1,12 +1,48 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import { useAppSelector } from "..";
 
+/* interface IInstructor {
+  name: string;
+  avatar: string;
+}
+
+interface ILesson {
+  id: string;
+  title: string;
+  duration: string;
+  isCompleted: boolean;
+  isCurrent: boolean;
+  videoUrl: string;
+  description: string;
+}
+
+interface IModule {
+  id: string;
+  title: string;
+  description: string;
+  isLocked: boolean;
+  progress: number;
+  lessons: ILesson[];
+}
+
+interface ICourse {
+  id: number;
+  title: string;
+  description: string;
+  instructor: IInstructor;
+  thumbnail: string;
+  totalDuration: string;
+  level: string;
+  tags: string[];
+  modules: IModule[];
+} */
+
 export const playerSlice = createSlice({
   name: "player",
   initialState: {
     courses: [
       {
-        id: "node-course",
+        id: 12,
         title: "Curso de Node.js",
         description: "Aprenda Node.js do básico ao avançado",
         instructor: {
@@ -66,7 +102,7 @@ export const playerSlice = createSlice({
         ],
       },
       {
-        id: "typescript-course",
+        id: 11,
         title: "Curso de TypeScript",
         description: "Domine tipagem no JavaScript",
         instructor: {
@@ -117,7 +153,7 @@ export const playerSlice = createSlice({
         ],
       },
       {
-        id: "next-course",
+        id: 6,
         title: "Curso de Next.js",
         description: "Crie aplicações fullstack com Next.js",
         instructor: {
@@ -168,7 +204,7 @@ export const playerSlice = createSlice({
         ],
       },
       {
-        id: "css-course",
+        id: 5,
         title: "CSS Avançado",
         description: "Domine layouts e responsividade",
         instructor: {
@@ -219,12 +255,15 @@ export const playerSlice = createSlice({
         ],
       },
     ],
-    currentCourseIndex: 0,
+    currentCourseSelected: 0,
     currentModuleIndex: 0,
     currentLessonIndex: 0,
   },
 
   reducers: {
+    selectCourse: (state, action: PayloadAction<number>) => {
+      state.currentCourseSelected = action.payload;
+    }
     /* play: (state, action: PayloadAction<[number, number]>) => {
       state.currentModuleIndex = action.payload[0];
       state.currentLessonIndex = action.payload[1];
@@ -250,7 +289,7 @@ export const playerSlice = createSlice({
 });
 
 export const player = playerSlice.reducer;
-/* export const { play, next } = playerSlice.actions; */
+export const { selectCourse } = playerSlice.actions;
 
 export const useCurrentLesson = () => {
   return useAppSelector((store) => {

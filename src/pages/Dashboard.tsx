@@ -1,16 +1,17 @@
+import { useDispatch } from "react-redux";
 import { useAppSelector } from "../store";
+import { selectCourse } from "../store/slices/player";
 
 function Dashboard() {
-  const { courses, currentCourseIndex } = useAppSelector((store) => {
-    const { courses, currentCourseIndex } = store.player;
-
-    return { courses, currentCourseIndex };
+  const dispatch = useDispatch();
+  
+  const courses = useAppSelector((store) => {
+    return store.player.courses;
   });
 
-  const handleCourseClick = (course: any) => {
-    console.log("Curso clicado: ", course);
+  const handleCourseClick = (courseId: number) => {
+    dispatch(selectCourse(courseId));
   }
-  console.log("Curso: ", courses[currentCourseIndex]);
 
   return (
     <main className="bg-sky-50 h-full md:h-screen w-full lg:px-15 px-5">
@@ -41,7 +42,7 @@ function Dashboard() {
               <button
                 className="bg-blue-500 text-white text-sm font-bold w-40 mt-4 py-2 px-4 rounded cursor-pointer hover:bg-blue-700
           transition-all ease-in"
-              onClick={() => handleCourseClick(course)}
+              onClick={() => handleCourseClick(course.id)}
               >
                 Ver mais
               </button>
