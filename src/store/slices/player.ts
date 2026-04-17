@@ -126,7 +126,7 @@ export const playerSlice = createSlice({
         },
         thumbnail: "url-da-capa",
         totalDuration: "3h 40min",
-        level: "Intermediário",
+        level: "Avançado",
         tags: ["nextjs", "react", "fullstack"],
         modules: [
           {
@@ -219,12 +219,13 @@ export const playerSlice = createSlice({
         ],
       },
     ],
+    currentCourseIndex: 0,
     currentModuleIndex: 0,
     currentLessonIndex: 0,
   },
 
   reducers: {
-    play: (state, action: PayloadAction<[number, number]>) => {
+    /* play: (state, action: PayloadAction<[number, number]>) => {
       state.currentModuleIndex = action.payload[0];
       state.currentLessonIndex = action.payload[1];
     },
@@ -244,12 +245,12 @@ export const playerSlice = createSlice({
           state.currentLessonIndex = 0;
         }
       }
-    },
+    }, */
   },
 });
 
 export const player = playerSlice.reducer;
-export const { play, next } = playerSlice.actions;
+/* export const { play, next } = playerSlice.actions; */
 
 export const useCurrentLesson = () => {
   return useAppSelector((store) => {
